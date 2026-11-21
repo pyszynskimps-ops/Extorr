@@ -1,0 +1,29 @@
+name: Publish verified Android APKs
+
+on:
+  workflow_dispatch:
+    inputs:
+      bundle_ref:
+        description: Commit containing the verified publication payload
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-verified-apks
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.bundle_ref }}
+      - name: Validate APK bytes, stage both releases, then publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 publication/publish.py
