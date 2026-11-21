@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "applications": {
+    "extor": {
+      "version": "1.04",
+      "release_url": "https://github.com/pyszynskimps-ops/Extorr/releases/tag/extor-v1.04",
+      "prerelease": true,
+      "assets": {
+        "mobile": {
+          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/extor-v1.04/extor-android-mobile-arm64-v8a.apk",
+          "filename": "extor-android-mobile-arm64-v8a.apk",
+          "abi": "arm64-v8a",
+          "size": 20760211,
+          "sha256": "6428e19948fb25c7e5efa2e544dc9c0a9b3681d4a67518a331a17d7676a3d579"
+        },
+        "tv": {
+          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/extor-v1.04/extor-android-tv-armeabi-v7a.apk",
+          "filename": "extor-android-tv-armeabi-v7a.apk",
+          "abi": "armeabi-v7a",
+          "size": 16411477,
+          "sha256": "554769a4233261c18cc2ba35ed670f4ea26d647776d2a131231db0a402d792b5"
+        }
+      }
+    },
+    "1337x": {
+      "version": "1.17",
+      "release_url": "https://github.com/pyszynskimps-ops/Extorr/releases/tag/1337x-v1.17",
+      "prerelease": true,
+      "assets": {
+        "mobile": {
+          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/1337x-v1.17/1337x-android-mobile-arm64-v8a.apk",
+          "filename": "1337x-android-mobile-arm64-v8a.apk",
+          "abi": "arm64-v8a",
+          "size": 20929613,
+          "sha256": "c1d7608a972efe65efdc8d8204bd9b5deca448b6994592ccca6d61fa364f3649"
+        },
+        "tv": {
+          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/1337x-v1.17/1337x-android-tv-armeabi-v7a.apk",
+          "filename": "1337x-android-tv-armeabi-v7a.apk",
+          "abi": "armeabi-v7a",
+          "size": 16580832,
+          "sha256": "c42d0c0b4959897ddf98605aa89730a0ba6694f5cd244744e4ea402238849625"
+        }
+      }
+    }
+  }
+}
