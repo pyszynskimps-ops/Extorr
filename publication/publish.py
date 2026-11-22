@@ -11,7 +11,9 @@ REPO = 'pyszynskimps-ops/Extorr'
 assert os.environ.get('GITHUB_REPOSITORY') == REPO
 payload = Path('payload').resolve()
 plan = json.loads((payload / 'publish-plan.json').read_text())
-assert {app['key'] for app in plan} == {'1337x', 'extor'} and len(plan) == 2
+assert 1 <= len(plan) <= 3
+assert len({app['key'] for app in plan}) == len(plan)
+assert {app['key'] for app in plan} <= {'1337x', 'extor', 'torrent-player'}
 
 def gh(*args, allow_failure=False):
     result = subprocess.run(['gh', *args], capture_output=True, text=True)
@@ -37,9 +39,9 @@ def attest(remote, expected):
         assert assets[name]['state'] == 'uploaded'
         assert assets[name].get('digest') == 'sha256:' + digest, 'Server digest mismatch'
 
-# Complete local verification of all four binaries before creating/publishing anything.
+# Complete local verification of all selected binaries before creating/publishing anything.
 for app in plan:
-    assert re.fullmatch(r'(1337x|extor)-v[0-9]+\.[0-9]+', app['tag'])
+    assert re.fullmatch(r'(1337x|extor|torrent-player)-v[0-9]+\.[0-9]+', app['tag'])
     assert app['tag'] == app['key'] + '-v' + app['version']
     assert len(app['assets']) == 2
     expected_names = {app['key'] + '-android-tv-armeabi-v7a.apk', app['key'] + '-android-mobile-arm64-v8a.apk'}
@@ -76,7 +78,7 @@ for app in plan:
     staged.append(app)
     print(app['tag'] + ': staged and verified')
 
-# Publication is the final phase, after both drafts and every server digest are verified.
+# Publication is the final phase, after all selected drafts and every server digest are verified.
 for app in staged:
     gh('release', 'edit', app['tag'], '--repo', REPO, '--draft=false', '--prerelease', '--latest=false')
     remote = release(app['tag'])

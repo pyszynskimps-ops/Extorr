@@ -1,0 +1,26 @@
+[
+  {
+    "key": "torrent-player",
+    "tag": "torrent-player-v2.01",
+    "version": "2.01",
+    "title": "Torrent Player",
+    "assets": [
+      {
+        "name": "torrent-player-android-tv-armeabi-v7a.apk",
+        "path": "torrent-player-android-tv-armeabi-v7a.apk",
+        "abi": "armeabi-v7a",
+        "size": 16624514,
+        "sha256": "dea66c63ced891684a11939efc407cfae820efc291a84885f99380c66786bb54"
+      },
+      {
+        "name": "torrent-player-android-mobile-arm64-v8a.apk",
+        "path": "torrent-player-android-mobile-arm64-v8a.apk",
+        "abi": "arm64-v8a",
+        "size": 20973292,
+        "sha256": "e64e7083089cb1733d904ec62463662fe758013981995cfd4e386787d156e986"
+      }
+    ],
+    "checksums": "SHA256SUMS",
+    "notes": "RELEASE-NOTES.md"
+  }
+]
