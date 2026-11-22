@@ -44,23 +44,23 @@
       }
     },
     "torrent-player": {
-      "version": "2.03",
-      "release_url": "https://github.com/pyszynskimps-ops/Extorr/releases/tag/torrent-player-v2.03",
+      "version": "2.04",
+      "release_url": "https://github.com/pyszynskimps-ops/Extorr/releases/tag/torrent-player-v2.04",
       "prerelease": true,
       "assets": {
         "tv": {
-          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.03/torrent-player-android-tv-armeabi-v7a.apk",
+          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.04/torrent-player-android-tv-armeabi-v7a.apk",
           "filename": "torrent-player-android-tv-armeabi-v7a.apk",
           "abi": "armeabi-v7a",
-          "size": 16831125,
-          "sha256": "3d3a57e007acd960db7942329d90dd0d0804f43cf931cfd52832d29b8f538921"
+          "size": 16831128,
+          "sha256": "c413742ca450ec17292a9027618786dc5f1504413b5c7b1b7b6cd83acb74b3de"
         },
         "mobile": {
-          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.03/torrent-player-android-mobile-arm64-v8a.apk",
+          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.04/torrent-player-android-mobile-arm64-v8a.apk",
           "filename": "torrent-player-android-mobile-arm64-v8a.apk",
           "abi": "arm64-v8a",
-          "size": 21179911,
-          "sha256": "c689d6c3ef94a94740e4970f7eb1511fd423c12fcea8e76ae5b5183e71f0bd0a"
+          "size": 21179910,
+          "sha256": "ea86e7ae9f699df08e97d274be48f2379e2bc62727cea348baa91ba14abb3525"
         }
       }
     }
