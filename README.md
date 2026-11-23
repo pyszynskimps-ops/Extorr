@@ -4,7 +4,7 @@ Publiczne pliki instalacyjne do podlinkowania na stronie. Pobieranie nie wymaga 
 
 | Aplikacja | Android TV — ARMv7, 32-bit | Android mobile — ARM64, 64-bit |
 |---|---|---|
-| Torrent Player 2.20 | [torrent-player-android-tv-armeabi-v7a.apk](https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.20/torrent-player-android-tv-armeabi-v7a.apk) | [torrent-player-android-mobile-arm64-v8a.apk](https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.20/torrent-player-android-mobile-arm64-v8a.apk) |
+| Torrent Player 2.21 | [torrent-player-android-tv-armeabi-v7a.apk](https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.21/torrent-player-android-tv-armeabi-v7a.apk) | [torrent-player-android-mobile-arm64-v8a.apk](https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.21/torrent-player-android-mobile-arm64-v8a.apk) |
 | ExTorrent / Extor 1.04 | [extor-android-tv-armeabi-v7a.apk](https://github.com/pyszynskimps-ops/Extorr/releases/download/extor-v1.04/extor-android-tv-armeabi-v7a.apk) | [extor-android-mobile-arm64-v8a.apk](https://github.com/pyszynskimps-ops/Extorr/releases/download/extor-v1.04/extor-android-mobile-arm64-v8a.apk) |
 | 1337x 1.17 | [1337x-android-tv-armeabi-v7a.apk](https://github.com/pyszynskimps-ops/Extorr/releases/download/1337x-v1.17/1337x-android-tv-armeabi-v7a.apk) | [1337x-android-mobile-arm64-v8a.apk](https://github.com/pyszynskimps-ops/Extorr/releases/download/1337x-v1.17/1337x-android-mobile-arm64-v8a.apk) |
 
@@ -16,7 +16,7 @@ To kompilacje testowe z podpisem debug. Certyfikat może różnić się od wcze�
 
 1337x 1.17 tłumaczy opisy na angielski przy języku English. ExTorrent / Extor zachowuje polski interfejs. Dostępność napisów zależy od tytułu i języka.
 
-Torrent Player 2.20 to osobna aplikacja łącząca ExTorrent i 1337x, z katalogiem 20 profili źródeł i możliwością dodawania RSS/Atom/Torznab oraz reguł HTML/JSON. Domyślny język: angielski, dostępny też polski. Prywatne serwisy wymagają własnego konta lub tokenu; CAPTCHA i potwierdzenie e-mail wykonuje użytkownik w formularzu serwisu. Liczba seedów nie gwarantuje połączenia. Wersja testowa wymaga sprawdzenia na urządzeniu.
+Torrent Player 2.21 to osobna aplikacja łącząca ExTorrent i 1337x, z katalogiem 20 profili źródeł i możliwością dodawania RSS/Atom/Torznab oraz reguł HTML/JSON. Domyślny język: angielski, dostępny też polski. Prywatne serwisy wymagają własnego konta lub tokenu; CAPTCHA i potwierdzenie e-mail wykonuje użytkownik w formularzu serwisu. Liczba seedów nie gwarantuje połączenia. Wersja testowa wymaga sprawdzenia na urządzeniu.
 
 Cinema Copper 2.02 wprowadza grafitowe tło, miedziane akcenty, czcionki Manrope i DM Serif Display oraz górne menu. Podpis APK jest zgodny z publicznym wydaniem Torrent Player 2.01.
 
@@ -39,3 +39,5 @@ Wersja 2.20 dodaje zapasowe pobieranie napisów z SubDL po braku wyników OpenSu
 Wydanie obejmuje też poprawki przeglądania pilotem, ograniczenie zadań metadanych i plakatów w tle, dokładne dopasowanie opisów IMDb, przewijanie długich opisów i tłumaczenie na polski. Z karty filmu usunięto wiersz Audio; ustawienia ścieżek odtwarzacza pozostają dostępne. Testy: 226 testów Androida (113 TV, 113 mobile), bez błędów. Zachowano zgodność podpisów z publicznym 2.09 i mobile ARM64 z wyrównaniem 16 KB. Nie przeprowadzono instalacji na fizycznym TV/telefonie.
 
 Niski bufor: odtwarzanie pobiera jeden plik o stałej jakości. Ta wersja nie zmienia automatycznie rozdzielczości podczas odtwarzania. Mniejsze wydanie tego samego filmu może wymagać mniejszego pasma, ale jego uruchomienie wymaga ponownego buforowania.
+
+Wersja 2.21 dopisuje doładowane filmy na końcu katalogów i wyników wyszukiwania bez przestawiania wcześniejszych kart. Home zachowuje poprzednie partie po 120 pozycji, a ręczna zmiana sortowania porządkuje całą listę. Zabezpieczono przełączanie wydań po zamknięciu okna Release i anulowanie oczekującej zmiany po cofnięciu. Przeszło 238 testów Androida (119 TV i 119 mobile), bez błędów. Zgłoszonej awarii fizycznego TV nie odtworzono w środowisku testowym. Podpisy i biblioteki silnika są zgodne z 2.20; wspólna konfiguracja SubDL została zachowana.
