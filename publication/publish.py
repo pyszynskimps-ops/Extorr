@@ -9,6 +9,7 @@ import zipfile
 import base64
 from datetime import datetime,timezone
 from catalogue import filename,update_catalogue
+from release_lookup import ReleaseLookup
 
 REPO = 'pyszynskimps-ops/Extorr'
 assert os.environ.get('GITHUB_REPOSITORY') == REPO
@@ -24,11 +25,9 @@ def gh(*args, allow_failure=False, payload=None):
         raise RuntimeError(result.stderr[:1500])
     return result
 
-def releases():
-    return json.loads(gh('api', f'repos/{REPO}/releases?per_page=100').stdout)
-
+lookup=ReleaseLookup(gh,REPO)
 def release(tag):
-    return next((r for r in releases() if r['tag_name'] == tag), None)
+    return lookup.find(tag)
 
 def inside(relative):
     path = (payload / relative).resolve()
@@ -68,8 +67,7 @@ for app in plan:
     expected = {a['name']: a['sha256'] for a in app['assets']}
     expected[Path(app['checksums']).name] = hashlib.sha256(inside(app['checksums']).read_bytes()).hexdigest()
     if not remote:
-        gh('release', 'create', app['tag'], '--repo', REPO, '--target', 'main', '--draft', '--prerelease',
-           '--title', app['title'] + ' ' + app['version'] + ' — Android TV i mobile', '--notes-file', str(inside(app['notes'])))
+        lookup.create_draft(app['tag'], app['title'] + ' ' + app['version'] + ' — Android TV i mobile', inside(app['notes']).read_text())
     elif remote['draft']:
         gh('release', 'edit', app['tag'], '--repo', REPO, '--target', 'main', '--notes-file', str(inside(app['notes'])))
     # Add versioned aliases without replacing any already published asset.
