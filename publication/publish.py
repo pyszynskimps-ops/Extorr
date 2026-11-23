@@ -6,6 +6,9 @@ from pathlib import Path
 import re
 import subprocess
 import zipfile
+import base64
+from datetime import datetime,timezone
+from catalogue import filename,update_catalogue
 
 REPO = 'pyszynskimps-ops/Extorr'
 assert os.environ.get('GITHUB_REPOSITORY') == REPO
@@ -15,8 +18,8 @@ assert 1 <= len(plan) <= 3
 assert len({app['key'] for app in plan}) == len(plan)
 assert {app['key'] for app in plan} <= {'1337x', 'extor', 'torrent-player'}
 
-def gh(*args, allow_failure=False):
-    result = subprocess.run(['gh', *args], capture_output=True, text=True)
+def gh(*args, allow_failure=False, payload=None):
+    result = subprocess.run(['gh', *args], input=json.dumps(payload) if payload is not None else None, capture_output=True, text=True)
     if result.returncode and not allow_failure:
         raise RuntimeError(result.stderr[:1500])
     return result
@@ -34,17 +37,17 @@ def inside(relative):
 
 def attest(remote, expected):
     assets = {a['name']: a for a in remote['assets']}
-    assert set(assets) == set(expected), 'Unexpected release asset set'
+    assert set(expected) <= set(assets), 'Missing release assets'
     for name, digest in expected.items():
         assert assets[name]['state'] == 'uploaded'
         assert assets[name].get('digest') == 'sha256:' + digest, 'Server digest mismatch'
 
 # Complete local verification of all selected binaries before creating/publishing anything.
 for app in plan:
-    assert re.fullmatch(r'(1337x|extor|torrent-player)-v[0-9]+\.[0-9]+', app['tag'])
+    assert re.fullmatch(r'(1337x|extor|torrent-player)-v[0-9]+\.[0-9]+(?:\.[0-9]+)?', app['tag'])
     assert app['tag'] == app['key'] + '-v' + app['version']
     assert len(app['assets']) == 2
-    expected_names = {app['key'] + '-android-tv-armeabi-v7a.apk', app['key'] + '-android-mobile-arm64-v8a.apk'}
+    expected_names = {filename(app['key'],app['version'],device) for device in ['tv','mobile']}
     assert {a['name'] for a in app['assets']} == expected_names
     for asset in app['assets']:
         path = inside(asset['path'])
@@ -64,18 +67,23 @@ for app in plan:
     remote = release(app['tag'])
     expected = {a['name']: a['sha256'] for a in app['assets']}
     expected[Path(app['checksums']).name] = hashlib.sha256(inside(app['checksums']).read_bytes()).hexdigest()
-    if remote and not remote['draft']:
-        attest(remote, expected)
-        continue
     if not remote:
         gh('release', 'create', app['tag'], '--repo', REPO, '--target', 'main', '--draft', '--prerelease',
            '--title', app['title'] + ' ' + app['version'] + ' — Android TV i mobile', '--notes-file', str(inside(app['notes'])))
-    else:
+    elif remote['draft']:
         gh('release', 'edit', app['tag'], '--repo', REPO, '--target', 'main', '--notes-file', str(inside(app['notes'])))
-    gh('release', 'upload', app['tag'], '--repo', REPO, '--clobber',
-       *[str(inside(a['path'])) for a in app['assets']], str(inside(app['checksums'])))
+    # Add versioned aliases without replacing any already published asset.
+    remote=release(app['tag'])
+    known={asset['name']:asset for asset in remote['assets']}
+    paths=[inside(a['path']) for a in app['assets']]+[inside(app['checksums'])]
+    for path in paths:
+        previous=known.get(path.name)
+        if previous:
+            assert previous['digest']=='sha256:'+expected[path.name], 'Published asset differs; increment the app version'
+        else:
+            gh('release','upload',app['tag'],'--repo',REPO,str(path))
     attest(release(app['tag']), expected)
-    staged.append(app)
+    if remote['draft']: staged.append(app)
     print(app['tag'] + ': staged and verified')
 
 # Publication is the final phase, after all selected drafts and every server digest are verified.
@@ -84,3 +92,19 @@ for app in staged:
     remote = release(app['tag'])
     assert not remote['draft']
     print(app['tag'] + ': published ' + remote['html_url'])
+
+# Every successful publication updates one public manifest; the website reads it automatically.
+endpoint=f'repos/{REPO}/contents/downloads.json'
+for attempt in range(3):
+    file=json.loads(gh('api',endpoint+'?ref=main').stdout)
+    current=json.loads(base64.b64decode(file['content']))
+    public={app['tag']:release(app['tag']) for app in plan}
+    updated=update_catalogue(current,plan,public,datetime.now(timezone.utc).isoformat(timespec='seconds').replace('+00:00','Z'))
+    if updated==current:
+        print('Website catalogue already current');break
+    content=base64.b64encode((json.dumps(updated,indent=2)+'\n').encode()).decode()
+    result=gh('api','--method','PUT',endpoint,'--input','-',allow_failure=True,payload={
+        'message':'Update public downloads and publication date','sha':file['sha'],'branch':'main','content':content})
+    if not result.returncode:
+        print('Website catalogue and last-updated date published');break
+    if '409' not in result.stderr or attempt==2:raise RuntimeError(result.stderr[:1500])
