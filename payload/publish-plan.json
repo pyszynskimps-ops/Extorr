@@ -1,0 +1,26 @@
+[
+  {
+    "key": "torrent-player",
+    "version": "2.21",
+    "tag": "torrent-player-v2.21",
+    "title": "Torrent Player \u2014 Cinema Copper",
+    "assets": [
+      {
+        "name": "torrent-player-android-tv-armeabi-v7a.apk",
+        "path": "torrent-player-android-tv-armeabi-v7a.apk",
+        "size": 16947193,
+        "sha256": "ab11e5110e06d25acfa0c8ba23e44c29d315333590922ebcedcc112f9f894b44",
+        "abi": "armeabi-v7a"
+      },
+      {
+        "name": "torrent-player-android-mobile-arm64-v8a.apk",
+        "path": "torrent-player-android-mobile-arm64-v8a.apk",
+        "size": 21295966,
+        "sha256": "f40f835077486bf343b77ef50c716abf0b2332d6583c67628ba58148d9dda501",
+        "abi": "arm64-v8a"
+      }
+    ],
+    "checksums": "SHA256SUMS",
+    "notes": "RELEASE-NOTES.md"
+  }
+]
