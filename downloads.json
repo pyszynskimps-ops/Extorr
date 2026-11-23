@@ -44,28 +44,28 @@
       }
     },
     "torrent-player": {
-      "version": "2.22",
-      "release_url": "https://github.com/pyszynskimps-ops/Extorr/releases/tag/torrent-player-v2.22",
+      "version": "2.23",
+      "release_url": "https://github.com/pyszynskimps-ops/Extorr/releases/tag/torrent-player-v2.23",
       "prerelease": true,
       "assets": {
         "tv": {
-          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.22/torrent-player-v2.22-android-tv-armeabi-v7a.apk",
-          "filename": "torrent-player-v2.22-android-tv-armeabi-v7a.apk",
+          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.23/torrent-player-v2.23-android-tv-armeabi-v7a.apk",
+          "filename": "torrent-player-v2.23-android-tv-armeabi-v7a.apk",
           "abi": "armeabi-v7a",
-          "size": 16947189,
-          "sha256": "02cd68c214a391f81b5ffad67a3222cc31e4d39b42c083a7658fff4b012cd2c0"
+          "size": 16947186,
+          "sha256": "c4a149b5dfa8d87c98cd264b147f613b85fadf9f6b52c0cac0ffa529f139146b"
         },
         "mobile": {
-          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.22/torrent-player-v2.22-android-mobile-arm64-v8a.apk",
-          "filename": "torrent-player-v2.22-android-mobile-arm64-v8a.apk",
+          "url": "https://github.com/pyszynskimps-ops/Extorr/releases/download/torrent-player-v2.23/torrent-player-v2.23-android-mobile-arm64-v8a.apk",
+          "filename": "torrent-player-v2.23-android-mobile-arm64-v8a.apk",
           "abi": "arm64-v8a",
-          "size": 21295964,
-          "sha256": "2051154250875edeba502903c7a112187676d629656cfeb5ca66300d006eecae"
+          "size": 21295972,
+          "sha256": "9a3ce9a6da2a3ab3522e48eedc85789aaf28302d72990c34ffd64ec1087880d4"
         }
       },
-      "published_at": "2026-11-23T14:56:07Z",
-      "updated_at": "2026-11-23T15:14:38Z"
+      "published_at": "2026-11-23T16:01:48Z",
+      "updated_at": "2026-11-23T16:01:50Z"
     }
   },
-  "updated_at": "2026-11-23T15:14:38Z"
+  "updated_at": "2026-11-23T16:01:50Z"
 }
